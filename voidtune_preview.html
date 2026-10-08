@@ -1,0 +1,757 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoidTune — Animated Avatar & Banner Studio Preview</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.3.2/gifshot.min.js"></script>
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 35px rgba(147, 51, 234, 0.4)); }
+      50% { filter: drop-shadow(0 0 25px rgba(217, 70, 239, 0.8)) drop-shadow(0 0 50px rgba(168, 85, 247, 0.6)); }
+    }
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .neon-border {
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.35), inset 0 0 15px rgba(168, 85, 247, 0.2);
+    }
+    .glass-card {
+      background: rgba(15, 17, 28, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .scanline {
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+      background-size: 100% 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#070913] text-slate-100 font-sans antialiased min-h-screen p-4 md:p-8">
+
+  <!-- Header Section -->
+  <div class="max-w-5xl mx-auto mb-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-3">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      Interactive Preview & GIF Studio • Discord Ready
+    </div>
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-purple-400 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">
+      VoidTune Animated Identity
+    </h1>
+    <p class="text-slate-400 text-sm md:text-base mt-2 max-w-2xl mx-auto">
+      Discord Developer Portal specifications ke exact dimensions ke saath custom animated <b>Avatar (1024x1024, 1:1)</b> aur <b>Banner (680x240, 17:6)</b> ka live preview.
+    </p>
+
+    <!-- Specs Summary Pills -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-mono">
+      <span class="px-3 py-1 rounded-lg bg-slate-900/90 border border-purple-900/50 text-purple-300">
+        Icon: 1024 Ã— 1024 px (1:1 Aspect)
+      </span>
+      <span class="px-3 py-1 rounded-lg bg-slate-900/90 border border-purple-900/50 text-cyan-300">
+        Banner: 680 Ã— 240 px (17:6 Aspect)
+      </span>
+      <span class="px-3 py-1 rounded-lg bg-slate-900/90 border border-purple-900/50 text-emerald-300">
+        File Size: &lt; 10 MB (Discord Compliant)
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="max-w-5xl mx-auto space-y-10">
+
+    <!-- Section 1: Live Discord Profile Card Simulation -->
+    <div class="glass-card border border-purple-900/50 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-purple-900/40 pb-4">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          <span class="text-sm uppercase tracking-wider font-bold text-slate-200">Discord Profile Simulation</span>
+        </div>
+        
+        <!-- Mode Switcher -->
+        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-purple-800/40 text-xs">
+          <button id="modeHybrid" onclick="setViewMode('hybrid')" class="px-3 py-1 rounded-lg bg-purple-700 text-white font-medium transition-all">
+            âš¡ Animated Hybrid
+          </button>
+          <button id="modeCanvas" onclick="setViewMode('canvas')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white font-medium transition-all">
+            ðŸŒŠ Pure Visualizer
+          </button>
+          <button id="modeArt" onclick="setViewMode('art')" class="px-3 py-1 rounded-lg text-slate-400 hover:text-white font-medium transition-all">
+            ðŸ–¼ï¸ Master Art
+          </button>
+        </div>
+      </div>
+
+      <!-- Discord Profile Modal Box -->
+      <div class="max-w-md mx-auto bg-[#11121d] rounded-2xl overflow-hidden border border-purple-900/40 shadow-2xl relative">
+        
+        <!-- Live Animated Banner Container (680x240 Aspect Ratio) -->
+        <div class="w-full h-40 md:h-44 relative overflow-hidden bg-[#070713]">
+          <!-- Art Background for Hybrid Mode -->
+          <img id="bannerImg" src="assets/voidtune_banner_concept.jpg" class="w-full h-full object-cover absolute inset-0 opacity-80" alt="Banner Art">
+          <!-- Canvas Overlay for Waves & Equalizer -->
+          <canvas id="bannerCanvas" class="w-full h-full object-cover relative z-10"></canvas>
+          
+          <div class="absolute top-2.5 right-3 text-[10px] font-mono text-purple-300/90 bg-black/60 px-2 py-0.5 rounded border border-purple-500/30 flex items-center gap-1.5 backdrop-blur-sm z-20">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+            LAVALINK v4 • 60 FPS
+          </div>
+        </div>
+
+        <!-- Profile Body -->
+        <div class="px-5 pb-5 relative">
+          <!-- Floating Avatar -->
+          <div class="relative -mt-16 mb-3 inline-block">
+            <div class="w-28 h-28 rounded-full p-1 bg-[#11121d] relative group">
+              <!-- Animated Glowing Rings around avatar -->
+              <div class="absolute inset-0 rounded-full border border-purple-500/50 animate-[spinSlow_10s_linear_infinite]"></div>
+              <div class="absolute -inset-1 rounded-full border border-dashed border-fuchsia-400/40 animate-[spinReverse_16s_linear_infinite]"></div>
+              
+              <!-- Avatar Circle Container -->
+              <div class="w-full h-full rounded-full overflow-hidden bg-black relative flex items-center justify-center shadow-lg shadow-purple-950/80">
+                <img id="avatarImg" src="assets/voidtune_avatar_concept.jpg" class="w-full h-full object-cover absolute inset-0 opacity-85" alt="Avatar Art">
+                <canvas id="avatarCanvas" class="w-full h-full object-cover relative z-10"></canvas>
+              </div>
+
+              <!-- Discord Status Badge (Online) -->
+              <div class="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-[#11121d] flex items-center justify-center z-20">
+                <div class="w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bot Info -->
+          <div class="flex items-center gap-2">
+            <h2 class="text-xl font-bold text-white tracking-wide">VoidTune</h2>
+            <span class="bg-[#5865F2] text-white text-[11px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-sm">
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              APP
+            </span>
+            <span class="text-xs text-slate-400 font-mono">#0196</span>
+          </div>
+
+          <p class="text-xs text-purple-300/80 mt-1 font-mono">
+            Modular • Multi-Guild • Lavalink v4 Cluster
+          </p>
+
+          <div class="mt-3.5 pt-3.5 border-t border-slate-800/80 text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Activity:</span>
+              <span class="text-fuchsia-300 font-medium flex items-center gap-1.5">
+                <span class="inline-block w-2 h-2 rounded-full bg-fuchsia-400 animate-ping"></span>
+                Playing 24/7 HQ Audio
+              </span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">Audio Cluster:</span>
+              <span class="text-purple-300 font-mono">Serenetia & MilloHost</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Detailed Side-by-Side Breakdown & Downloads -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Card A: Avatar Breakdown -->
+      <div class="glass-card border border-purple-900/40 rounded-2xl p-6 relative flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-purple-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-fuchsia-400"></span>
+              Avatar Identity (1024Ã—1024)
+            </h3>
+            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-0.5 rounded border border-purple-700/40 font-mono">1:1 Aspect</span>
+          </div>
+          
+          <p class="text-xs text-slate-400 mb-4">
+            Cosmic Event-Horizon core with glowing violet neon headphones, radial soundwave frequencies, and starry dark space background.
+          </p>
+
+          <!-- Avatar Large Preview Canvas & Image -->
+          <div class="w-64 h-64 mx-auto rounded-2xl overflow-hidden border border-purple-500/30 shadow-2xl relative bg-black flex items-center justify-center p-2 mb-4 group">
+            <img id="avatarLargeImg" src="assets/voidtune_avatar_concept.jpg" class="w-full h-full object-cover absolute inset-0 opacity-80" alt="Avatar High-Res">
+            <canvas id="avatarLargeCanvas" class="w-full h-full rounded-xl relative z-10"></canvas>
+            
+            <!-- Circular Crop Overlay Indicator -->
+            <div id="avatarCircleGuide" class="absolute inset-2 rounded-full border-2 border-dashed border-purple-400/50 pointer-events-none z-20"></div>
+          </div>
+
+          <div class="flex items-center justify-center gap-2 mb-4 text-xs">
+            <button onclick="toggleCircleGuide()" class="text-purple-300 hover:text-white font-mono bg-purple-950/60 px-2.5 py-1 rounded border border-purple-800/40">
+              Toggle Discord Circle Mask
+            </button>
+          </div>
+        </div>
+
+        <!-- Avatar Action Buttons -->
+        <div class="space-y-2 pt-4 border-t border-purple-900/30">
+          <a href="assets/voidtune_avatar.gif" download="voidtune_avatar.gif" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-purple-600 to-fuchsia-600 hover:opacity-90 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-900/40 transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+      Instant Download Animated Avatar GIF (Ready)
+    </a>
+          <a href="assets/voidtune_avatar_concept.jpg" download="voidtune_avatar_1024.jpg" class="w-full py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-2 border border-slate-700 transition-all">
+            Download High-Res Master Still (1024x1024)
+          </a>
+          <div id="avatarProgress" class="hidden text-center text-xs font-mono text-purple-300 animate-pulse pt-1">
+            Rendering GIF frames... please wait
+          </div>
+        </div>
+      </div>
+
+      <!-- Card B: Banner Breakdown -->
+      <div class="glass-card border border-purple-900/40 rounded-2xl p-6 relative flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-purple-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+              Banner Identity (680Ã—240)
+            </h3>
+            <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-0.5 rounded border border-purple-700/40 font-mono">17:6 Aspect</span>
+          </div>
+
+          <p class="text-xs text-slate-400 mb-4">
+            Multi-frequency glowing sine waves, rhythmic audio equalizer bars, starry space nebula, and cybernetic HUD diagnostics.
+          </p>
+
+          <!-- Banner Large Preview Canvas & Image -->
+          <div class="w-full h-40 rounded-2xl overflow-hidden border border-purple-500/30 shadow-2xl relative bg-black flex items-center justify-center mb-4">
+            <img id="bannerLargeImg" src="assets/voidtune_banner_concept.jpg" class="w-full h-full object-cover absolute inset-0 opacity-80" alt="Banner High-Res">
+            <canvas id="bannerLargeCanvas" class="w-full h-full relative z-10"></canvas>
+          </div>
+
+          <div class="text-center text-xs text-slate-500 font-mono mb-4">
+            Exact Discord Desktop & Mobile ratio • Zero stretching
+          </div>
+        </div>
+
+        <!-- Banner Action Buttons -->
+        <div class="space-y-2 pt-4 border-t border-purple-900/30">
+          <a href="assets/voidtune_banner.gif" download="voidtune_banner.gif" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-purple-600 to-cyan-600 hover:opacity-90 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-900/40 transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+      Instant Download Animated Banner GIF (Ready)
+    </a>
+          <a href="assets/voidtune_banner_concept.jpg" download="voidtune_banner_680x240.jpg" class="w-full py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-2 border border-slate-700 transition-all">
+            Download High-Res Master Still (680x240)
+          </a>
+          <div id="bannerProgress" class="hidden text-center text-xs font-mono text-cyan-300 animate-pulse pt-1">
+            Rendering GIF frames... please wait
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section 3: Interactive Controls & Studio -->
+    <div class="glass-card border border-purple-900/40 rounded-2xl p-6">
+      <h3 class="text-base font-bold text-purple-200 mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+        Live Animation Controls
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-2">Audio BPM / Animation Pulse Speed</label>
+          <div class="flex gap-2">
+            <button onclick="setSpeed(0.5, this)" class="speed-btn px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium">0.5x (Chill)</button>
+            <button onclick="setSpeed(1.0, this)" class="speed-btn px-3 py-1.5 text-xs rounded-lg bg-purple-700 text-white font-medium">1.0x (Normal)</button>
+            <button onclick="setSpeed(1.8, this)" class="speed-btn px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium">1.8x (Fast)</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-2">Neon Palette Accent</label>
+          <div class="flex items-center gap-3">
+            <button onclick="setTheme('purple', this)" title="Cosmic Void (Purple & Fuchsia)" class="theme-btn w-9 h-9 rounded-full bg-gradient-to-tr from-purple-600 to-fuchsia-400 border-2 border-white/80 shadow-lg shadow-purple-600/50"></button>
+            <button onclick="setTheme('cyan', this)" title="Cyber Glow (Cyan & Blue)" class="theme-btn w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 border border-slate-600 hover:border-white"></button>
+            <button onclick="setTheme('crimson', this)" title="Solar Flare (Crimson & Amber)" class="theme-btn w-9 h-9 rounded-full bg-gradient-to-tr from-rose-500 to-amber-500 border border-slate-600 hover:border-white"></button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-2">Wave Frequency & Amplitude</label>
+          <input type="range" min="10" max="55" value="28" id="waveIntensity" oninput="updateIntensity(this.value)" class="w-full accent-purple-500 cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+            <span>Subtle</span>
+            <span>Balanced</span>
+            <span>Intense</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Animation Engine & GIF Exporter -->
+  <script>
+    let speed = 1.0;
+    let waveAmp = 28;
+    let theme = 'crimson';
+    let tick = 0;
+    let viewMode = 'hybrid'; // 'hybrid' | 'canvas' | 'art'
+
+    // Canvas references
+    const bannerCanvas = document.getElementById('bannerCanvas');
+    const bannerCtx = bannerCanvas.getContext('2d');
+    const bannerLargeCanvas = document.getElementById('bannerLargeCanvas');
+    const bannerLargeCtx = bannerLargeCanvas.getContext('2d');
+
+    const avatarCanvas = document.getElementById('avatarCanvas');
+    const avatarCtx = avatarCanvas.getContext('2d');
+    const avatarLargeCanvas = document.getElementById('avatarLargeCanvas');
+    const avatarLargeCtx = avatarLargeCanvas.getContext('2d');
+
+    // Images
+    const bannerImg = document.getElementById('bannerImg');
+    const bannerLargeImg = document.getElementById('bannerLargeImg');
+    const avatarImg = document.getElementById('avatarImg');
+    const avatarLargeImg = document.getElementById('avatarLargeImg');
+
+    function resizeCanvases() {
+      [bannerCanvas, bannerLargeCanvas].forEach(c => {
+        c.width = 680;
+        c.height = 240;
+      });
+      [avatarCanvas, avatarLargeCanvas].forEach(c => {
+        c.width = 512;
+        c.height = 512;
+      });
+    }
+    resizeCanvases();
+
+    function setSpeed(val, btn) {
+      speed = val;
+      document.querySelectorAll('.speed-btn').forEach(b => {
+        b.className = 'speed-btn px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium';
+      });
+      if (btn) btn.className = 'speed-btn px-3 py-1.5 text-xs rounded-lg bg-purple-700 text-white font-medium';
+    }
+
+    function setTheme(th, btn) {
+      theme = th;
+      document.querySelectorAll('.theme-btn').forEach(b => {
+        b.classList.remove('border-2', 'border-white/80', 'shadow-lg');
+        b.classList.add('border', 'border-slate-600');
+      });
+      if (btn) {
+        btn.classList.add('border-2', 'border-white/80', 'shadow-lg');
+        btn.classList.remove('border-slate-600');
+      }
+    }
+
+    function updateIntensity(val) { waveAmp = parseInt(val); }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      const hybridBtn = document.getElementById('modeHybrid');
+      const canvasBtn = document.getElementById('modeCanvas');
+      const artBtn = document.getElementById('modeArt');
+
+      [hybridBtn, canvasBtn, artBtn].forEach(b => {
+        b.className = 'px-3 py-1 rounded-lg text-slate-400 hover:text-white font-medium transition-all';
+      });
+
+      if (mode === 'hybrid') {
+        hybridBtn.className = 'px-3 py-1 rounded-lg bg-purple-700 text-white font-medium transition-all';
+        [bannerImg, bannerLargeImg, avatarImg, avatarLargeImg].forEach(img => img.style.display = 'block');
+        [bannerCanvas, bannerLargeCanvas, avatarCanvas, avatarLargeCanvas].forEach(c => c.style.display = 'block');
+      } else if (mode === 'canvas') {
+        canvasBtn.className = 'px-3 py-1 rounded-lg bg-purple-700 text-white font-medium transition-all';
+        [bannerImg, bannerLargeImg, avatarImg, avatarLargeImg].forEach(img => img.style.display = 'none');
+        [bannerCanvas, bannerLargeCanvas, avatarCanvas, avatarLargeCanvas].forEach(c => c.style.display = 'block');
+      } else if (mode === 'art') {
+        artBtn.className = 'px-3 py-1 rounded-lg bg-purple-700 text-white font-medium transition-all';
+        [bannerImg, bannerLargeImg, avatarImg, avatarLargeImg].forEach(img => img.style.display = 'block');
+        [bannerCanvas, bannerLargeCanvas, avatarCanvas, avatarLargeCanvas].forEach(c => c.style.display = 'none');
+      }
+    }
+
+    let showGuide = true;
+    function toggleCircleGuide() {
+      showGuide = !showGuide;
+      document.getElementById('avatarCircleGuide').style.display = showGuide ? 'block' : 'none';
+    }
+
+    // Color definitions
+    function getColors() {
+      if (theme === 'cyan') {
+        return {
+          primary: '#06b6d4',
+          secondary: '#3b82f6',
+          glow: 'rgba(6, 182, 212, 0.45)',
+          bars: '#0ea5e9'
+        };
+      } else if (theme === 'crimson') {
+        return {
+          primary: '#f43f5e',
+          secondary: '#f59e0b',
+          glow: 'rgba(244, 63, 94, 0.45)',
+          bars: '#fb7185'
+        };
+      }
+      return {
+        primary: '#a855f7',
+        secondary: '#d946ef',
+        glow: 'rgba(168, 85, 247, 0.45)',
+        bars: '#c084fc'
+      };
+    }
+
+    // Particle Stars
+    const stars = Array.from({ length: 70 }, () => ({
+      x: Math.random() * 680,
+      y: Math.random() * 240,
+      radius: Math.random() * 1.5 + 0.4,
+      alpha: Math.random(),
+      speed: Math.random() * 0.025 + 0.008
+    }));
+
+    const numBars = 42;
+
+    function renderBanner(ctx, isHybrid = false) {
+      const colors = getColors();
+      ctx.clearRect(0, 0, 680, 240);
+
+      if (!isHybrid) {
+        // Deep Nebula background in pure canvas mode
+        const bgGrad = ctx.createLinearGradient(0, 0, 680, 240);
+        bgGrad.addColorStop(0, '#070714');
+        bgGrad.addColorStop(0.5, '#120b24');
+        bgGrad.addColorStop(1, '#080818');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, 680, 240);
+
+        // Twinkling stars
+        stars.forEach(s => {
+          s.alpha += s.speed;
+          const currentAlpha = (Math.sin(s.alpha) + 1) / 2 * 0.7 + 0.2;
+          ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      // Glowing Ambient Light Pulses
+      const pulseRadius = 140 + Math.sin(tick * 0.04 * speed) * 35;
+      const centerGlow = ctx.createRadialGradient(340, 120, 10, 340, 120, pulseRadius);
+      centerGlow.addColorStop(0, colors.glow);
+      centerGlow.addColorStop(1, 'transparent');
+      ctx.fillStyle = centerGlow;
+      ctx.fillRect(0, 0, 680, 240);
+
+      // Equalizer Spectrum Bars
+      const startX = 145;
+      const barWidth = 6;
+      const gap = 3.5;
+      for (let i = 0; i < numBars; i++) {
+        const freqPulse = Math.sin(tick * 0.05 * speed + i * 0.3) * Math.cos(tick * 0.03 * speed - i * 0.2);
+        const h = Math.max(8, 22 + freqPulse * 28 + Math.sin(i * 0.4 + tick * 0.08) * 14);
+        const bx = startX + i * (barWidth + gap);
+        const by = 222 - h;
+
+        const barGrad = ctx.createLinearGradient(0, by, 0, 222);
+        barGrad.addColorStop(0, colors.secondary);
+        barGrad.addColorStop(1, 'rgba(15, 23, 42, 0.15)');
+
+        ctx.fillStyle = barGrad;
+        ctx.shadowColor = colors.primary;
+        ctx.shadowBlur = 8;
+        ctx.fillRect(bx, by, barWidth, h);
+      }
+      ctx.shadowBlur = 0;
+
+      // Flowing Sine Audio Waves
+      for (let layer = 0; layer < 3; layer++) {
+        ctx.beginPath();
+        ctx.lineWidth = layer === 0 ? 3 : 1.5;
+        ctx.strokeStyle = layer === 0 ? colors.primary : colors.secondary;
+        ctx.shadowColor = colors.primary;
+        ctx.shadowBlur = layer === 0 ? 16 : 8;
+
+        for (let x = 0; x <= 680; x += 5) {
+          const y = 115 + 
+            Math.sin(x * 0.015 + tick * 0.04 * speed + layer * 1.6) * (waveAmp * (1 - layer * 0.2)) +
+            Math.cos(x * 0.008 - tick * 0.03 * speed) * 12;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+
+      // Cyber HUD Text (pure canvas mode)
+      if (!isHybrid) {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.font = 'bold 16px "Courier New", monospace';
+        ctx.fillText('V O I D T U N E', 35, 45);
+
+        ctx.fillStyle = colors.secondary;
+        ctx.font = '10px monospace';
+        ctx.fillText('// HIGH-FIDELITY AUDIO CORE', 35, 62);
+      }
+    }
+
+    function renderAvatar(ctx, isHybrid = false) {
+      const colors = getColors();
+      ctx.clearRect(0, 0, 512, 512);
+
+      const cx = 256;
+      const cy = 256;
+
+      if (!isHybrid) {
+        // Deep space background
+        const avatarBg = ctx.createRadialGradient(cx, cy, 20, cx, cy, 250);
+        avatarBg.addColorStop(0, '#150d2e');
+        avatarBg.addColorStop(0.7, '#070612');
+        avatarBg.addColorStop(1, '#000000');
+        ctx.fillStyle = avatarBg;
+        ctx.fillRect(0, 0, 512, 512);
+      }
+
+      // Radial Audio Equalizer Spectrum
+      const rays = 48;
+      for (let i = 0; i < rays; i++) {
+        const angle = (i / rays) * Math.PI * 2 + tick * 0.01 * speed;
+        const pulse = (Math.sin(tick * 0.06 * speed + i * 0.4) + 1) * 16;
+        const innerR = 145;
+        const outerR = 150 + pulse + Math.cos(i * 0.5) * 8;
+
+        const x1 = cx + Math.cos(angle) * innerR;
+        const y1 = cy + Math.sin(angle) * innerR;
+        const x2 = cx + Math.cos(angle) * outerR;
+        const y2 = cy + Math.sin(angle) * outerR;
+
+        ctx.strokeStyle = i % 2 === 0 ? colors.primary : colors.secondary;
+        ctx.lineWidth = 3;
+        ctx.shadowColor = colors.primary;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+
+      // Swirling Singularity Core
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(tick * 0.02 * speed);
+
+      for (let arc = 0; arc < 4; arc++) {
+        ctx.beginPath();
+        ctx.arc(0, 0, 68 + arc * 18, arc * Math.PI / 2, arc * Math.PI / 2 + 1.25);
+        ctx.strokeStyle = arc % 2 === 0 ? colors.primary : colors.secondary;
+        ctx.lineWidth = 4;
+        ctx.shadowColor = colors.primary;
+        ctx.shadowBlur = 12;
+        ctx.stroke();
+      }
+      ctx.restore();
+      ctx.shadowBlur = 0;
+
+      // Center glowing pulse
+      const corePulse = Math.sin(tick * 0.08 * speed) * 8;
+      const coreGrad = ctx.createRadialGradient(cx, cy, 5, cx, cy, 55 + corePulse);
+      coreGrad.addColorStop(0, '#ffffff');
+      coreGrad.addColorStop(0.35, colors.secondary);
+      coreGrad.addColorStop(0.8, '#0b0416');
+      coreGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 55 + corePulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Futuristic Neon Headphones (pure canvas mode)
+      if (!isHybrid) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const headBounce = Math.sin(tick * 0.05 * speed) * 4;
+        ctx.translate(0, headBounce);
+
+        // Headphone Arc
+        ctx.beginPath();
+        ctx.arc(0, 0, 115, Math.PI * 0.85, Math.PI * 2.15);
+        ctx.lineWidth = 14;
+        ctx.strokeStyle = '#2d1b4e';
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, 115, Math.PI * 0.9, Math.PI * 2.1);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = colors.primary;
+        ctx.shadowColor = colors.secondary;
+        ctx.shadowBlur = 15;
+        ctx.stroke();
+
+        // Ear Cushions
+        [-105, 105].forEach((pos, idx) => {
+          ctx.fillStyle = '#160d2b';
+          ctx.shadowColor = colors.primary;
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.roundRect(pos - 12, -25, 24, 65, 8);
+          ctx.fill();
+
+          ctx.strokeStyle = idx === 0 ? colors.primary : colors.secondary;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        });
+
+        ctx.restore();
+      }
+    }
+
+    function animate() {
+      tick++;
+      if (viewMode !== 'art') {
+        const isHybrid = viewMode === 'hybrid';
+        renderBanner(bannerCtx, isHybrid);
+        renderBanner(bannerLargeCtx, isHybrid);
+        renderAvatar(avatarCtx, isHybrid);
+        renderAvatar(avatarLargeCtx, isHybrid);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // In-Browser GIF Export Studio
+    function exportAvatarGIF() {
+      const btn = document.getElementById('btnAvatarGIF');
+      const progress = document.getElementById('avatarProgress');
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+      progress.classList.remove('hidden');
+      progress.innerText = 'Capturing 24 smooth animation frames...';
+
+      // Capture frames from offscreen canvas
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = 400;
+      exportCanvas.height = 400;
+      const expCtx = exportCanvas.getContext('2d');
+
+      const frames = [];
+      const totalFrames = 24;
+      const step = (Math.PI * 2) / totalFrames;
+
+      for (let f = 0; f < totalFrames; f++) {
+        tick += 4;
+        expCtx.clearRect(0, 0, 400, 400);
+        
+        // Draw background concept art if available
+        if (avatarLargeImg && avatarLargeImg.complete) {
+          expCtx.drawImage(avatarLargeImg, 0, 0, 400, 400);
+        }
+        
+        // Scale and draw avatar animations
+        expCtx.save();
+        expCtx.scale(400 / 512, 400 / 512);
+        renderAvatar(expCtx, true);
+        expCtx.restore();
+
+        frames.push(exportCanvas.toDataURL('image/png'));
+      }
+
+      progress.innerText = 'Compiling Discord Animated GIF... (Almost ready)';
+
+      if (typeof gifshot !== 'undefined') {
+        gifshot.createGIF({
+          images: frames,
+          gifWidth: 400,
+          gifHeight: 400,
+          interval: 0.05,
+          numFrames: totalFrames
+        }, function (obj) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-50');
+          progress.classList.add('hidden');
+
+          if (!obj.error) {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = obj.image;
+            downloadLink.download = 'voidtune_avatar_animated.gif';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          } else {
+            alert('GIF Generation error: ' + obj.error);
+          }
+        });
+      } else {
+        alert('GIF encoder is loading, please try again in a second.');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+        progress.classList.add('hidden');
+      }
+    }
+
+    function exportBannerGIF() {
+      const btn = document.getElementById('btnBannerGIF');
+      const progress = document.getElementById('bannerProgress');
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+      progress.classList.remove('hidden');
+      progress.innerText = 'Capturing 24 smooth banner frames...';
+
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = 680;
+      exportCanvas.height = 240;
+      const expCtx = exportCanvas.getContext('2d');
+
+      const frames = [];
+      const totalFrames = 24;
+
+      for (let f = 0; f < totalFrames; f++) {
+        tick += 4;
+        expCtx.clearRect(0, 0, 680, 240);
+
+        if (bannerLargeImg && bannerLargeImg.complete) {
+          expCtx.drawImage(bannerLargeImg, 0, 0, 680, 240);
+        }
+
+        renderBanner(expCtx, true);
+        frames.push(exportCanvas.toDataURL('image/png'));
+      }
+
+      progress.innerText = 'Compiling Discord Banner GIF... (Almost ready)';
+
+      if (typeof gifshot !== 'undefined') {
+        gifshot.createGIF({
+          images: frames,
+          gifWidth: 680,
+          gifHeight: 240,
+          interval: 0.05,
+          numFrames: totalFrames
+        }, function (obj) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-50');
+          progress.classList.add('hidden');
+
+          if (!obj.error) {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = obj.image;
+            downloadLink.download = 'voidtune_banner_animated.gif';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          } else {
+            alert('GIF Generation error: ' + obj.error);
+          }
+        });
+      } else {
+        alert('GIF encoder is loading, please try again in a second.');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+        progress.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
+
