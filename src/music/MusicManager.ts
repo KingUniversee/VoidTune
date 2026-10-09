@@ -19,33 +19,37 @@ export class MusicManager {
     this.client = client;
     this.logger = logger.child({ module: 'MusicManager' });
 
-    // 1. Primary Node (MilloHost v4)
-    const primaryNode: NodeOption = {
+    // 1. Serenetia (1st Priority - Always Preferred)
+    const serenetiaHost = config.LAVALINK_HOST && config.LAVALINK_HOST.includes('serenetia')
+      ? config.LAVALINK_HOST
+      : 'lavalinkv4.serenetia.com';
+    const serenetiaPort = config.LAVALINK_PORT && config.LAVALINK_HOST && config.LAVALINK_HOST.includes('serenetia')
+      ? config.LAVALINK_PORT
+      : 443;
+    const serenetiaAuth = config.LAVALINK_PASSWORD && config.LAVALINK_HOST && config.LAVALINK_HOST.includes('serenetia')
+      ? config.LAVALINK_PASSWORD
+      : 'https://seretia.link/discord';
+    const serenetiaSecure = true;
+
+    const serenetiaNode: NodeOption = {
+      name: 'Serenetia-Node-1',
+      url: `${serenetiaHost}:${serenetiaPort}`,
+      auth: serenetiaAuth,
+      secure: serenetiaSecure,
+    };
+
+    // 2. MilloHost (Automatic High-Availability Fallback)
+    const fallbackNode: NodeOption = {
       name: 'MilloHost-V4',
-      url: `${config.LAVALINK_HOST || 'lava-v4.millohost.my.id'}:${config.LAVALINK_PORT || 443}`,
-      auth: config.LAVALINK_PASSWORD || 'https://discord.gg/mjS5J2K3ep',
-      secure: config.LAVALINK_SECURE ?? true,
-    };
-
-    // 2. High-Availability Fallback Nodes Pool
-    const triniumNode: NodeOption = {
-      name: 'Trinium-V4',
-      url: 'lavalink-v4.triniumhost.com:443',
-      auth: 'free',
+      url: 'lava-v4.millohost.my.id:443',
+      auth: 'https://discord.gg/mjS5J2K3ep',
       secure: true,
     };
 
-    const nazhaNode: NodeOption = {
-      name: 'Nazha-Main',
-      url: 'lavalink.nazha.online:443',
-      auth: 'nazhafreelava',
-      secure: true,
-    };
-
-    this.configuredNodes = [primaryNode, triniumNode, nazhaNode];
+    this.configuredNodes = [serenetiaNode, fallbackNode];
 
     this.logger.info(
-      `Configured Lavalink cluster: [Primary: ${primaryNode.name}] | [Failover Pool: Trinium-V4, Nazha-Main]`
+      `Configured Lavalink cluster: [1st Priority: Serenetia-Node-1] | [Backup Fallback: MilloHost-V4]`
     );
 
     const options: ShoukakuOptions = {
@@ -57,11 +61,17 @@ export class MusicManager {
       reconnectInterval: 10,
       restTimeout: 10,
       nodeResolver: (nodes) => {
+        // ALWAYS prioritize Serenetia if connected!
+        const serenetia = Array.from(nodes.values()).find(
+          (n) => n.name === 'Serenetia-Node-1' && n.state === Constants.State.CONNECTED && n.sessionId
+        );
+        if (serenetia) return serenetia;
+
+        // Fallback to connected node with lowest penalty
         const connected = Array.from(nodes.values()).filter(
           (n) => n.state === Constants.State.CONNECTED && n.sessionId
         );
         if (connected.length === 0) return undefined;
-        // Balance across connected nodes by penalty/load
         connected.sort((a, b) => (a.penalties || 0) - (b.penalties || 0));
         return connected[0];
       },
@@ -379,47 +389,17 @@ export class MusicManager {
         }
       }
 
+      // 1. Smooth Reconnection: Reconnect disconnected nodes without disrupting active sessions
       for (const node of this.shoukaku.nodes.values()) {
-        // If node is disconnected, attempt to reconnect
         if (node.state === Constants.State.DISCONNECTED) {
-          this.logger.info({ node: node.name }, 'Detected disconnected Lavalink node in keepalive. Forcing reconnect...');
           try {
             node.connect();
           } catch (connErr) {
             this.logger.debug({ node: node.name, connErr }, 'Failed to reconnect Lavalink node');
           }
-          continue;
-        }
-
-        if (node.state !== Constants.State.CONNECTED) continue;
-
-        // 1. WebSocket Ping to maintain TCP connection through reverse proxies
-        try {
-          if (node.ws && (node.ws as any).readyState === 1 /* WebSocket.OPEN */) {
-            (node.ws as any).ping();
-          }
-        } catch (pingErr) {
-          this.logger.debug({ node: node.name, pingErr }, 'Keepalive WS ping error');
-        }
-
-        // 2. Validate session liveness on Lavalink server
-        if (node.sessionId) {
-          try {
-            await node.rest.updateSession(true, 60);
-          } catch (sessionErr: any) {
-            if (sessionErr?.status === 404 || String(sessionErr?.message || '').includes('404')) {
-              this.logger.warn(
-                { node: node.name, sessionId: node.sessionId },
-                'Lavalink session reported 404 on server! Forcing immediate node reconnect to acquire fresh session...'
-              );
-              try {
-                node.disconnect(4004, 'Session 404 on server');
-              } catch {}
-            }
-          }
         }
       }
-    }, 20_000);
+    }, 30_000);
   }
 
   private bindShoukakuEvents(): void {

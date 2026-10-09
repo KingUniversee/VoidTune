@@ -102,12 +102,14 @@ export class TrackResolver {
       );
       result = await this.cascadeFallback(trimmed, source.name, context);
     } else if (result.tracks.length > 0 && !isDirectUrl && !isExplicitPrefix) {
-      // Relevance Shield: Ensure initial result actually matches the query keywords
+      // Relevance Shield: Only apply to short (1-2 words) single title queries
+      // Multi-word searches (lyrics, long titles) rely on YouTube's indexed engine.
       const queryClean = trimmed.toLowerCase().replace(/[^a-z0-9\s]/gi, ' ');
       const queryWords = queryClean
         .split(/\s+/)
         .filter((w) => w.length > 1 && !['the', 'and', 'for', 'from', 'with', 'song', 'audio', 'video'].includes(w));
-      if (queryWords.length > 0) {
+
+      if (queryWords.length > 0 && queryWords.length <= 2) {
         const first = result.tracks[0];
         if (first) {
           const targetText = `${first.title} ${first.author || ''}`.toLowerCase();

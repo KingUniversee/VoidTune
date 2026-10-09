@@ -154,6 +154,9 @@ export class GuildPlayer extends EventEmitter {
       await this.preResolvePlayableAudio(targetTrack);
 
       try {
+        // Guarantee pristine playback: clear any filters (timescale, speed, pitch)
+        await this.shoukakuPlayer.clearFilters().catch(() => {});
+
         await this.shoukakuPlayer.playTrack({
           track: {
             encoded: targetTrack.encodedTrack,
@@ -265,12 +268,11 @@ export class GuildPlayer extends EventEmitter {
 
       if (allNodes.length === 0) return;
 
-      // Resolve using YouTube Music (ytmsearch:) for pure original studio master audio,
-      // falling back to official YouTube audio searches and lastly SoundCloud.
+      // Prioritize official YouTube audio searches and studio master releases
       const queries = [
-        `ytmsearch:${cleanTitle} ${cleanArtist}`.trim(),
-        `ytmsearch:${cleanTitle}`.trim(),
         `ytsearch:${cleanTitle} ${cleanArtist} official audio`.trim(),
+        `ytsearch:${cleanTitle} ${cleanArtist}`.trim(),
+        `ytmsearch:${cleanTitle} ${cleanArtist}`.trim(),
         `scsearch:${cleanTitle} ${cleanArtist}`.trim(),
       ];
 
